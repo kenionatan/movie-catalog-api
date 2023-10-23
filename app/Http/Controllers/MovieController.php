@@ -5,12 +5,33 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 
+
 class MovieController extends Controller
-{
+{   
     /**
      * Display a listing of all the movies.
      *
      * @return \Illuminate\Http\Response
+     * 
+     * @OA\Info(
+     *     title="Movie Catalog API",
+     *     version="1.0",
+     *     description="Movie Catalog API",
+     * )
+     * 
+     * @OA\PathItem(
+     *     path="/api/movie/get",
+     * )
+     * 
+     * @OA\Get(
+     *     path="/api/movie/get",
+     *     tags={"Movies"},
+     *     summary="Get a list of movies",
+     *     @OA\Response(
+     *         response=200,
+     *         description="A list of movies",
+     *     )
+     * )
      */
     public function get()
     {
@@ -24,6 +45,46 @@ class MovieController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * 
+     * @OA\PathItem(
+     *     path="/api/movie/add",
+     * )
+     * 
+     * @OA\Post(
+     *     path="/api/movie/add",
+     *     tags={"Movies"},
+     *     summary="Create a new movie",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Movie data",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="title",
+     *                 type="string",
+     *                 example="Movie Title"
+     *             ),
+     *             @OA\Property(
+     *                 property="genre",
+     *                 type="string",
+     *                 example="Action"
+     *             ),
+     *             @OA\Property(
+     *                 property="duration",
+     *                 type="integer",
+     *                 example=120
+     *             ),
+     *             @OA\Property(
+     *                 property="cover",
+     *                 type="string",
+     *                 example="https://example.com/movie.jpg"
+     *             ),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Movie Created",
+     *     )
+     * )
      */
     public function create(Request $request)
     {
@@ -56,6 +117,55 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * @OA\Put(
+     *     path="/api/movie/update/{id}",
+     *     tags={"Movies"},
+     *     summary="Update a movie",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the movie to update",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="Updated movie data",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="title",
+     *                 type="string",
+     *                 example="Updated Movie Title"
+     *             ),
+     *             @OA\Property(
+     *                 property="genre",
+     *                 type="string",
+     *                 example="Updated Genre"
+     *             ),
+     *             @OA\Property(
+     *                 property="duration",
+     *                 type="integer",
+     *                 example=130
+     *             ),
+     *             @OA\Property(
+     *                 property="cover",
+     *                 type="string",
+     *                 example="https://example.com/updated-movie.jpg"
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Movie Updated",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Movie not found",
+     *     )
+     * )
      */
     public function update($id, Request $request)
     {
@@ -101,6 +211,29 @@ class MovieController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * @OA\Delete(
+     *     path="/api/movie/delete/{id}",
+     *     tags={"Movies"},
+     *     summary="Delete a movie",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the movie to delete",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Movie Deleted",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Movie not found",
+     *     )
+     * )
      */
     public function delete($id)
     {

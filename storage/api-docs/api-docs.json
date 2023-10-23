@@ -1,0 +1,244 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Movie Catalog API",
+        "description": "Movie Catalog API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/movie/get": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Get a list of movies",
+                "description": "Display a listing of all the movies.",
+                "operationId": "b48665e7136a9e8db914da30ab4b0c3b",
+                "responses": {
+                    "200": {
+                        "description": "A list of movies"
+                    }
+                }
+            }
+        },
+        "/api/movie/add": {
+            "post": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Create a new movie",
+                "description": "Create a new movie.",
+                "operationId": "87bbf6f00e86b8b590b31d5c061f4b06",
+                "requestBody": {
+                    "description": "Movie data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Movie Title"
+                                    },
+                                    "genre": {
+                                        "type": "string",
+                                        "example": "Action"
+                                    },
+                                    "duration": {
+                                        "type": "integer",
+                                        "example": 120
+                                    },
+                                    "cover": {
+                                        "type": "string",
+                                        "example": "https://example.com/movie.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Movie Created"
+                    }
+                }
+            }
+        },
+        "/api/user/get": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get a list of users",
+                "description": "Display a listing of all users",
+                "operationId": "9ca19da37c9e1937b6b02dae1b1ef52d",
+                "responses": {
+                    "200": {
+                        "description": "A list of users"
+                    }
+                }
+            }
+        },
+        "/api/movie/update/{id}": {
+            "put": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Update a movie",
+                "description": "Update the specified movie.",
+                "operationId": "2b63015bcb4424da9e11d1133d145190",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the movie to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Updated movie data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Updated Movie Title"
+                                    },
+                                    "genre": {
+                                        "type": "string",
+                                        "example": "Updated Genre"
+                                    },
+                                    "duration": {
+                                        "type": "integer",
+                                        "example": 130
+                                    },
+                                    "cover": {
+                                        "type": "string",
+                                        "example": "https://example.com/updated-movie.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Movie Updated"
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    }
+                }
+            }
+        },
+        "/api/movie/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Delete a movie",
+                "description": "Delete the specified movie.",
+                "operationId": "1ee0b69bea55dc05046221620fce104d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the movie to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Movie Deleted"
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    }
+                }
+            }
+        },
+        "/api/user/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Register a new user",
+                "description": "Create a new movie.",
+                "operationId": "d03ee3a44bdd6f0025efd14c5c76b5ae",
+                "requestBody": {
+                    "description": "User registration data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "your-password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User registered successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User registered successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
