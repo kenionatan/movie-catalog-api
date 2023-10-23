@@ -35,6 +35,7 @@ services:
     depends_on:
       - db
   redis:
+    container_name: redis-movie
     image: redis:latest
     ports:
       - "6379:6379"

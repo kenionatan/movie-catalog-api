@@ -12,6 +12,9 @@ RUN apt-get update -y
 
 RUN a2enmod rewrite
 
+RUN pecl install redis && \
+    docker-php-ext-enable redis
+
 ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

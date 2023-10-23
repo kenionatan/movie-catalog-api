@@ -21,10 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('/movie')->group(function () {
-    Route::get("/get", [MovieController::class, 'get'])->name("get.get");
-    Route::post("/add", [MovieController::class, 'create'])->name("post.add");
-    Route::put("/update/{id}", [MovieController::class, 'update'])->name("put.update");
-    Route::delete("/delete/{id}", [MovieController::class, 'delete'])->name("delete.delete");
+    Route::get("/get", [MovieController::class, 'get'])->name("movie.get");
+    Route::post("/add", [MovieController::class, 'create'])->name("movie.add");
+    Route::put("/update/{id}", [MovieController::class, 'update'])->name("movie.update");
+    Route::delete("/delete/{id}", [MovieController::class, 'delete'])->name("movie.delete");
 });
 
-Route::post('/user/register', [UserController::class, 'register'])->name("user.register");
+Route::prefix('user')->group(function () {
+    Route::get("/get", [UserController::class, 'get'])->name("user.get");
+    Route::post("/register", [UserController::class, 'register'])->name("user.register");
+});
