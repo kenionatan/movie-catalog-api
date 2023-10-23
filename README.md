@@ -117,4 +117,5 @@ php artisan test
 application: localhost:8199
 phpmyadmin: localhost:8198
 mailhog: localhost:8025
+swagger: localhost:8199/api/documentation
 ```
