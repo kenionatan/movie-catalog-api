@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,4 @@ Route::prefix('/movie')->group(function () {
     Route::delete("/delete/{id}", [MovieController::class, 'delete'])->name("delete.delete");
 });
 
-Route::get('/user/register', [UserController::class, 'register']);
+Route::post('/user/register', [UserController::class, 'register'])->name("user.register");

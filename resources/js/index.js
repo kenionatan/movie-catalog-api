@@ -8,3 +8,26 @@ $(function () {
         }
     });
 });
+
+$('#register_user').on('submit', function(e) {
+    e.preventDefault();
+
+    var formData = {
+        name: $('#name').val(),
+        email: $('#email').val(),
+        password: $('#password').val()
+    };
+
+    $.ajax({
+        url: '/api/user/register',
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        success: function (response) {
+            $('#registerModal').hide();
+        },
+        error: function (xhr, status, error) {
+            // Handle errors, such as validation errors or registration failure
+        }
+    });
+});
