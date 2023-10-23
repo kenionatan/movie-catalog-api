@@ -84,10 +84,6 @@ chmod -R 777 storage/logs storage/framework
 ##### Run the migrations
 
 ```sh
-php artisan migrate:install
-```
-
-```sh
 php artisan migrate
 ```
 
