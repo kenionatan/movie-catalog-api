@@ -47,22 +47,31 @@ With the container running, run this command at the root of the project:
 ```sh
 docker exec -it app-movie bash
 ```
+##### Install dependencies
+execute:
+
+```sh
+composer install
+```
 ##### Configure .env
 
 ```sh
 cp .env.example .env
 ```
 
-
 ```sh
 php artisan key:generate
 ```
 
-##### Install dependencies
-execute:
+##### Set .env variables
 
 ```sh
-composer install
+DB_HOST=db
+DB_PASSWORD=secret
+...
+QUEUE_CONNECTION=redis
+...
+REDIS_HOST=redis-movie
 ```
 
 ##### Give permissions to the necessary folders
@@ -82,6 +91,12 @@ php artisan migrate:install
 php artisan migrate
 ```
 
+##### Run application
+
+```sh
+localhost:8199
+```
+
 ##### Generate swagger doc
 
 ```sh
@@ -94,4 +109,12 @@ php artisan l5-swagger:generate
 
 ```sh
 php artisan test
+```
+
+##### Additional information
+
+```sh
+application: localhost:8199
+phpmyadmin: localhost:8198
+mailhog: localhost:8025
 ```
