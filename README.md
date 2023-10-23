@@ -6,6 +6,7 @@
 
 ## Tecnologies
 
+- PHP
 - Laravel
 - JQuery
 - MySQL
@@ -24,13 +25,17 @@ If you haven't installed it, here are some reference links:
 With git installed and in a directory of your choice, download the project:
 
 ```sh
-git clone https://github.com/YolandoQ/test-solution.git
+git clone https://github.com/kenionatan/movie-catalog-api
 ```
 
 ##### Docker up
 ###### First check if the "db_data" folder is created in the root of the project, it will be used to persist MySQL data.
 
 Then, with Docker-compose installed, run this command from the project root:
+
+```sh
+docker-compose build
+```
 
 ```sh
 docker-compose up -d
@@ -67,12 +72,26 @@ storage/logs and storage/framework, as we are in a testing environment we will g
 chmod -R 777 storage/logs storage/framework
 ```
 
-##### To finish, let's run the migrations
+##### Run the migrations
 
 ```sh
-php artisan migrate:instal
+php artisan migrate:install
 ```
 
 ```sh
 php artisan migrate
+```
+
+##### Generate swagger doc
+
+```sh
+php artisan l5-swagger:generate
+```
+
+> Alternatively, you can set L5_SWAGGER_GENERATE_ALWAYS to true in your .env file so that your documentation will automatically be generated. Make sure your settings in config/l5-swagger.php are complete.
+
+##### Running tests
+
+```sh
+php artisan test
 ```
