@@ -7,6 +7,24 @@ use App\Models\Movie;
 
 class MovieControllerTest extends TestCase
 {
+    public function testGetMovies()
+    {
+        // Send a GET request
+        $response = $this->get('/api/movie/get');
+
+        // Assert that the response has a 200 status code (OK)
+        $response->assertStatus(200);
+
+        // Assert that the response is JSON
+        $response->assertJsonStructure([
+            '*' => [
+                'id',
+                'title',
+                'genre'
+            ],
+        ]);
+    }
+
     public function testCreateMovie()
     {
         $response = $this->post('/api/movie/add', [
